@@ -1,0 +1,37 @@
+{
+  "name": "fifa-rest-api",
+  "version": "1.0.0",
+  "description": "FIFA-REST-API ================= Rest api for FIFA stats.",
+  "scripts": {
+    "start": "nodemon",
+    "tsc:w": "tsc -w",
+    "lint": "tslint server/**/*.ts --fix",
+    "build": "tsc -p ./prod.tsconfig.json && ncp './server/assets' './dist/assets'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balumuriraj/FIFA-REST-API.git"
+  },
+  "author": "MohanRaj Balumuri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/balumuriraj/FIFA-REST-API/issues"
+  },
+  "homepage": "https://github.com/balumuriraj/FIFA-REST-API#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.9",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.16.8",
+    "@types/express": "^4.11.0",
+    "@types/mongoose": "^4.7.32",
+    "@types/node": "^8.5.7",
+    "nodemon": "^1.14.8",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.2"
+  }
+}

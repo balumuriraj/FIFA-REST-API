@@ -1,0 +1,13 @@
+.DS_Store
+*~
+.project
+.settings/
+node_modules
+server/**/*.js
+server/**/*.js.map
+typings
+.idea
+/npm-debug.log
+coverage
+dist
+.vscode/
