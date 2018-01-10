@@ -4,6 +4,7 @@
   "description": "FIFA-REST-API ================= Rest api for FIFA stats.",
   "scripts": {
     "start": "nodemon",
+    "tsc": "tsc",
     "tsc:w": "tsc -w",
     "lint": "tslint server/**/*.ts --fix",
     "build": "tsc -p ./prod.tsconfig.json && ncp './server/assets' './dist/assets'"
@@ -22,7 +23,8 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongoose": "^4.13.9",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "request": "^2.83.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.8",

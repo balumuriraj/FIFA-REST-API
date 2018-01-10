@@ -2,6 +2,7 @@ import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as http from "http";
 import * as logger from "morgan";
+import AdminRouter from "./routes/AdminRouter";
 import ClubRouter from "./routes/ClubRouter";
 
 // Creates and configures an ExpressJS web server.
@@ -39,6 +40,8 @@ class App {
 
     this.express.use("/", router);
     this.express.use("/api/v1/clubs", ClubRouter);
+    this.express.use("/api/v1/admin", AdminRouter);
+
   }
 
 }

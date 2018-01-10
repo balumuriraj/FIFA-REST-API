@@ -1,0 +1,14 @@
+{
+  "leagues": {
+    "13": {
+      "name": "Premier League",
+      "imageUrl": null,
+      "remoteId": 13
+    },
+    "53": {
+      "name": "La Liga",
+      "imageUrl": null,
+      "remoteId": 53
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { Club } from "../models/club/model";
+import request = require("request");
 
 export class ClubRouter {
   private router: Router = Router();
@@ -9,7 +9,7 @@ export class ClubRouter {
    */
   constructor() {
     this.router.get("/", this.getAll);
-    this.router.get("/:id", this.getOne);
+    // this.router.get("/:id", this.getOne);
   }
 
   public getRouter() {
@@ -17,33 +17,11 @@ export class ClubRouter {
   }
 
   /**
-   * GET all Heroes.
+   * GET all Clubs.
    */
   public async getAll(req: Request, res: Response, next: NextFunction) {
-    const clubs = await Club.find({}).exec();
-    res.json(clubs);
-  }
-
-  /**
-   * GET one clubs by id
-   */
-  public async getOne(req: Request, res: Response, next: NextFunction) {
-    const query = parseInt(req.params.id, 0);
-    const club = Club.find((hero) => hero.id === query);
-    if (club) {
-      res.status(200)
-        .send({
-          club,
-          message: "Success",
-          status: res.status,
-        });
-    } else {
-      res.status(404)
-        .send({
-          message: "No club found with the given id.",
-          status: res.status,
-        });
-    }
+    // const clubs = await Club.find({}).exec();
+    // res.json(data);
   }
 }
 
