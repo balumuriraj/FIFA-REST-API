@@ -25,7 +25,7 @@ function performRequest(params: object) {
   });
 }
 
-async function creatClubs(players: any[], leagueId: string) {
+async function creatClubs(players: any[], leagueId: string, clubsMetadata: any[]) {
   for (const playerData of players) {
     if (playerData.baseId === Number(playerData.id)) {
       const clubData = playerData.club;
@@ -34,19 +34,23 @@ async function creatClubs(players: any[], leagueId: string) {
       let clubId: string = null;
 
       if (!findResult.length) {
+        const clubMetadata = clubsMetadata.find((data) => data.name === clubData.name);
+
         clubId = await ClubModel.create({
           remoteId: clubData.id,
           abbrName: clubData.abbrName,
           name: clubData.name,
           imageUrl: clubData.imageUrls.normal.large,
           leagueId,
+          kit: clubMetadata && clubMetadata.kit,
+          stadium: clubMetadata && clubMetadata.stadium,
           rating: null,
-          players: []
+          playerIds: []
         });
         console.log("clubId: ", clubId);
 
         // update league
-        LeagueModel.update(leagueId, { $push: { clubs: clubId } });
+        LeagueModel.update(leagueId, { $push: { clubsIds: clubId } });
       }
       else {
         clubId = findResult[0]._id;
@@ -60,7 +64,7 @@ async function creatClubs(players: any[], leagueId: string) {
   const clubs = await ClubModel.find({});
 
   for (const club of clubs) {
-    const clubPlayerIds = club.players;
+    const clubPlayerIds = club.playerIds;
     const ratings: any = {};
 
     for (const id of clubPlayerIds) {
@@ -140,7 +144,7 @@ async function creatPlayer(playerData: any, clubId: string) {
     console.log("playerId: ", playerId);
 
     // update club
-    ClubModel.update(clubId, { $push: { players: playerId } });
+    ClubModel.update(clubId, { $push: { playerIds: playerId } });
   }
   else {
     playerId = findResult[0]._id;
@@ -163,14 +167,16 @@ export class AdminRouter {
 
   public async createDatabase(req: Request, res: Response) {
     const leaguesMetadata = metadata.leagues;
+    const clubsMetadata = metadata.clubs;
 
-    for (const remoteId in leaguesMetadata) {
-      const leagueMetadata = leaguesMetadata[remoteId];
+    for (const leagueMetadata of leaguesMetadata) {
+      const remoteId = leagueMetadata.remoteId;
       const leagueId = await LeagueModel.create({
         name: leagueMetadata.name,
         imageUrl: leagueMetadata.imageUrl,
         remoteId: leagueMetadata.remoteId,
-        clubs: []
+        nation: leagueMetadata.nation,
+        clubsIds: []
       });
       console.log("leagueId: ", leagueId);
 
@@ -184,7 +190,7 @@ export class AdminRouter {
         Array.prototype.push.apply(players, pageData.items);
       }
 
-      await creatClubs(players, leagueId);
+      await creatClubs(players, leagueId, clubsMetadata);
     }
   }
 }

@@ -1,14 +1,276 @@
 {
-  "leagues": {
-    "13": {
+  "leagues": [{
       "name": "Premier League",
       "imageUrl": null,
-      "remoteId": 13
+      "remoteId": 13,
+      "nation": "England"
     },
-    "53": {
+    {
       "name": "La Liga",
       "imageUrl": null,
-      "remoteId": 53
+      "remoteId": 53,
+      "nation": "Spain"
     }
-  }
+  ],
+  "clubs": [{
+      "name": "Chelsea",
+      "kit": {
+        "home": "blue",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Stamford Bridge",
+        "latitude": 53.990129,
+        "longitude": -0.914025
+      }
+    },
+    {
+      "name": "Manchester United",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Old Trafford",
+        "latitude": 53.46166,
+        "longitude": -2.271707
+      }
+    },
+    {
+      "name": "Manchester City",
+      "kit": {
+        "home": "blue",
+        "away": "black",
+        "alternate": "white"
+      },
+      "stadium": {
+        "name": "Etihad Stadium",
+        "latitude": 53.4765,
+        "longitude": -2.2002
+      }
+    },
+    {
+      "name": "Arsenal",
+      "kit": {
+        "home": "red",
+        "away": "yellow",
+        "alternate": "blue"
+      },
+      "stadium": {
+        "name": "Emirates Stadium",
+        "latitude": 51.5530,
+        "longitude": -0.1052
+      }
+    },
+    {
+      "name": "Tottenham Hotspur",
+      "kit": {
+        "home": "white",
+        "away": "black",
+        "alternate": "blue"
+      },
+      "stadium": {
+        "name": "White Hart Lane",
+        "latitude": 51.603212,
+        "longitude": -0.065739
+      }
+    },
+    {
+      "name": "Liverpool",
+      "kit": {
+        "home": "red",
+        "away": "black",
+        "alternate": "white"
+      },
+      "stadium": {
+        "name": "Anfield",
+        "latitude": 53.4251566327,
+        "longitude": -2.95649284068
+      }
+    },
+    {
+      "name": "Leicester City",
+      "kit": {
+        "home": "blue",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "King Power Stadium",
+        "latitude": 52.620366,
+        "longitude": -1.142189
+      }
+    },
+    {
+      "name": "Everton",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Goodison Park",
+        "latitude": 53.438787,
+        "longitude": -2.966319
+      }
+    },
+    {
+      "name": "Southampton",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "St Mary's Stadium",
+        "latitude": 50.909698,
+        "longitude": -1.404351
+      }
+    },
+    {
+      "name": "West Ham United",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "London Stadium",
+        "latitude": 51.5365,
+        "longitude": -0.0098
+      }
+    },
+    {
+      "name": "Bournemouth",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Dean Court",
+        "latitude": 50.72048,
+        "longitude": -1.8795
+      }
+    },
+    {
+      "name": "Watford",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Vicarage Road Stadium",
+        "latitude": 51.649836,
+        "longitude": -0.401486
+      }
+    },
+    {
+      "name": "Stoke City",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Britannia Stadium",
+        "latitude": 52.988333,
+        "longitude": -2.175556
+      }
+    },
+    {
+      "name": "Swansea City",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Liberty Stadium",
+        "latitude": 51.6422,
+        "longitude": -3.9351
+      }
+    },
+    {
+      "name": "Crystal Palace",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Selhurst Park",
+        "latitude": 51.398333,
+        "longitude": -0.085556
+      }
+    },
+    {
+      "name": "West Bromwich Albion",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "The Hawthorns",
+        "latitude": 52.509167,
+        "longitude": -1.963889
+      }
+    },
+    {
+      "name": "Burnley",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Turf Moor",
+        "latitude": 53.789167,
+        "longitude": -2.230278
+      }
+    },
+    {
+      "name": "Newcastle United",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "St James' Park",
+        "latitude": 54.975556,
+        "longitude": -1.621667
+      }
+    },
+    {
+      "name": "Brighton & Hove Albion",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Falmer Stadium",
+        "latitude": 50.861822,
+        "longitude": -0.083278
+      }
+    },
+    {
+      "name": "Huddersfield Town",
+      "kit": {
+        "home": "red",
+        "away": "white",
+        "alternate": "black"
+      },
+      "stadium": {
+        "name": "Kirklees Stadium",
+        "latitude": 53.654167,
+        "longitude": -1.768333
+      }
+    }
+  ]
 }

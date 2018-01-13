@@ -46,7 +46,7 @@ export class PlayerModel {
     });
   }
 
-  static find(query: any): Promise<IPlayer[]> {
+  static find(query: any = {}): Promise<IPlayer[]> {
     return new Promise<IPlayer[]>((resolve, reject) => {
       Player.find(query, (err: any, result: IPlayer[]) => {
         if (err) {

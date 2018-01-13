@@ -15,14 +15,40 @@ const Rating = {
   overall: Number
 };
 
+interface IKit {
+  home: string;
+  away: string;
+  alternate: string;
+}
+
+const Kit = {
+  home: String,
+  away: String,
+  alternate: String
+};
+
+interface IStadium {
+  name: string;
+  latitude: string;
+  longitude: string;
+}
+
+const Stadium = {
+  name: String,
+  latitude: String,
+  longitude: String
+};
+
 export interface IClub extends Document {
   remoteId: number;
   abbrName: string;
   name: string;
   imageUrl: string;
   leagueId: string;
+  kit: IKit;
+  stadium: IStadium;
   rating: IRating;
-  players: [string];
+  playerIds: [string];
 }
 
 // To remove deprecation error
@@ -34,8 +60,10 @@ const clubSchema = new Schema({
   name: String,
   imageUrl: String,
   leagueId: String,
+  kit: Kit,
+  stadium: Stadium,
   rating: Rating,
-  players: [String]
+  playerIds: [String]
 });
 
 const Club = mongoose.model<IClub>("Club", clubSchema, "Clubs");
@@ -59,9 +87,21 @@ export class ClubModel {
     });
   }
 
-  static find(query: any): Promise<IClub[]> {
+  static find(query: any = {}): Promise<IClub[]> {
     return new Promise<IClub[]>((resolve, reject) => {
       Club.find(query, (err: any, result: IClub[]) => {
+        if (err) {
+          reject(err);
+        }
+
+        resolve(result);
+      });
+    });
+  }
+
+  static findById(id: string): Promise<IClub> {
+    return new Promise<IClub>((resolve, reject) => {
+      Club.findById(id, (err: any, result: IClub) => {
         if (err) {
           reject(err);
         }

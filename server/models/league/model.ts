@@ -5,16 +5,18 @@ export interface ILeague extends Document {
   remoteId: number;
   name: string;
   imageUrl: string;
-  clubs: [string];
+  nation: string;
+  clubsIds: [string];
 }
 
 // To remove deprecation error
 mongoose.Promise = global.Promise;
 
 const leagueSchema = new Schema({
-  clubs: [String],
+  clubsIds: [String],
   imageUrl: String,
   name: String,
+  nation: String,
   remoteId: Number
 });
 
@@ -42,6 +44,30 @@ export class LeagueModel {
   static update(id: string, update: any): Promise<ILeague> {
     return new Promise<ILeague>((resolve, reject) => {
       League.findByIdAndUpdate(id, update, (err: any, result: ILeague) => {
+        if (err) {
+          reject(err);
+        }
+
+        resolve(result);
+      });
+    });
+  }
+
+  static find(query: any = {}): Promise<ILeague[]> {
+    return new Promise<ILeague[]>((resolve, reject) => {
+      League.find(query, (err: any, result: ILeague[]) => {
+        if (err) {
+          reject(err);
+        }
+
+        resolve(result);
+      });
+    });
+  }
+
+  static findById(id: string): Promise<ILeague> {
+    return new Promise<ILeague>((resolve, reject) => {
+      League.findById(id, (err: any, result: ILeague) => {
         if (err) {
           reject(err);
         }
