@@ -13,6 +13,7 @@
     }
   ],
   "clubs": [{
+      "remoteId": 5,
       "name": "Chelsea",
       "kit": {
         "home": "blue",
@@ -26,6 +27,7 @@
       }
     },
     {
+      "remoteId": 11,
       "name": "Manchester United",
       "kit": {
         "home": "red",
@@ -39,6 +41,7 @@
       }
     },
     {
+      "remoteId": 10,
       "name": "Manchester City",
       "kit": {
         "home": "blue",
@@ -52,6 +55,7 @@
       }
     },
     {
+      "remoteId": 1,
       "name": "Arsenal",
       "kit": {
         "home": "red",
@@ -65,6 +69,7 @@
       }
     },
     {
+      "remoteId": 18,
       "name": "Tottenham Hotspur",
       "kit": {
         "home": "white",
@@ -78,6 +83,7 @@
       }
     },
     {
+      "remoteId": 9,
       "name": "Liverpool",
       "kit": {
         "home": "red",
@@ -91,6 +97,7 @@
       }
     },
     {
+      "remoteId": 95,
       "name": "Leicester City",
       "kit": {
         "home": "blue",
@@ -104,6 +111,7 @@
       }
     },
     {
+      "remoteId": 7,
       "name": "Everton",
       "kit": {
         "home": "red",
@@ -117,6 +125,7 @@
       }
     },
     {
+      "remoteId": 17,
       "name": "Southampton",
       "kit": {
         "home": "red",
@@ -130,6 +139,7 @@
       }
     },
     {
+      "remoteId": 19,
       "name": "West Ham United",
       "kit": {
         "home": "red",
@@ -143,6 +153,7 @@
       }
     },
     {
+      "remoteId": 1943,
       "name": "Bournemouth",
       "kit": {
         "home": "red",
@@ -156,6 +167,7 @@
       }
     },
     {
+      "remoteId": 1795,
       "name": "Watford",
       "kit": {
         "home": "red",
@@ -169,6 +181,7 @@
       }
     },
     {
+      "remoteId": 1806,
       "name": "Stoke City",
       "kit": {
         "home": "red",
@@ -182,6 +195,7 @@
       }
     },
     {
+      "remoteId": 1960,
       "name": "Swansea City",
       "kit": {
         "home": "red",
@@ -195,6 +209,7 @@
       }
     },
     {
+      "remoteId": 1799,
       "name": "Crystal Palace",
       "kit": {
         "home": "red",
@@ -208,6 +223,7 @@
       }
     },
     {
+      "remoteId": 109,
       "name": "West Bromwich Albion",
       "kit": {
         "home": "red",
@@ -221,6 +237,7 @@
       }
     },
     {
+      "remoteId": 1796,
       "name": "Burnley",
       "kit": {
         "home": "red",
@@ -234,6 +251,7 @@
       }
     },
     {
+      "remoteId": 13,
       "name": "Newcastle United",
       "kit": {
         "home": "red",
@@ -247,6 +265,7 @@
       }
     },
     {
+      "remoteId": 1808,
       "name": "Brighton & Hove Albion",
       "kit": {
         "home": "red",
@@ -260,6 +279,7 @@
       }
     },
     {
+      "remoteId": 1939,
       "name": "Huddersfield Town",
       "kit": {
         "home": "red",

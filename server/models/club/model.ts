@@ -44,6 +44,7 @@ export interface IClub extends Document {
   abbrName: string;
   name: string;
   imageUrl: string;
+  imageData: string;
   leagueId: string;
   kit: IKit;
   stadium: IStadium;
@@ -59,6 +60,7 @@ const clubSchema = new Schema({
   abbrName: String,
   name: String,
   imageUrl: String,
+  imageData: String,
   leagueId: String,
   kit: Kit,
   stadium: Stadium,

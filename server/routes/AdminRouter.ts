@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import fs = require("fs");
+import { JSDOM } from "jsdom";
 import { Model } from "mongoose";
 import path = require("path");
 import request = require("request");
@@ -9,6 +10,111 @@ const metadata = JSON.parse(fs.readFileSync(path.join(__dirname, "../../server/a
 const defPositions: string[] = ["LWB", "LB", "CB", "RB", "RWB"];
 const midPositions: string[] = ["LM", "CAM", "CDM", "CM", "RM"];
 const attPositions: string[] = ["LW", "LF", "CF", "RF", "RW", "ST"];
+
+function performScrapeRequest(id: number) {
+  const endpoint = "https://www.fifaindex.com/teams/?league=";
+  const url = endpoint + id;
+  console.log(url);
+  return new Promise((resolve) => {
+    JSDOM.fromURL(url).then((dom) => {
+      const { document } = dom.window;
+      resolve(document);
+    });
+  });
+}
+
+async function createClubsFromScrapeData(clubsMetadata: any, leagueId: string, remoteLeagueId: number) {
+  const dom: any = await performScrapeRequest(remoteLeagueId);
+  const div = dom.getElementById("no-more-tables");
+  const table = div.getElementsByTagName("table")[0];
+  const body = div.getElementsByTagName("tbody")[0];
+  const rows = body.children;
+
+  for (const row of rows) {
+    const clubData = {
+      name: null,
+      leagueId,
+      imageUrl: null,
+      remoteId: null,
+      rating: {
+        attack: null,
+        midfield: null,
+        defence: null,
+        overall: null
+      }
+    };
+    const cells = row.children;
+
+    for (const cell of cells) {
+      const attributeValue = cell.getAttribute("data-title");
+
+      if (attributeValue) {
+        if (attributeValue === "Name") {
+          clubData.name = cell.firstChild.text;
+        }
+        else if (attributeValue === "ATT") {
+          clubData.rating.attack = cell.firstChild.textContent;
+        }
+        else if (attributeValue === "MID") {
+          clubData.rating.midfield = cell.firstChild.textContent;
+        }
+        else if (attributeValue === "DEF") {
+          clubData.rating.defence = cell.firstChild.textContent;
+        }
+        else if (attributeValue === "OVR") {
+          clubData.rating.overall = cell.firstChild.textContent;
+        }
+      }
+      else {
+        const anchor = cell.firstChild;
+        const href = anchor.href;
+        const id = href && href.split("/")[4];
+
+        clubData.remoteId = id && Number(id);
+
+        const imageUrl = anchor.firstChild.src;
+        clubData.imageUrl = imageUrl && imageUrl.replace("/50/", "/256/");
+      }
+    }
+
+    const clubMetadata = clubsMetadata.find((data) => data.remoteId === clubData.remoteId);
+    const imageData = await requestImageData(clubData.imageUrl);
+
+    const clubId = await ClubModel.create({
+      remoteId: clubData.remoteId,
+      name: (clubMetadata && clubMetadata.name) || clubData.name,
+      abbrName: clubData.name,
+      imageUrl: clubData.imageUrl,
+      imageData,
+      leagueId,
+      kit: clubMetadata && clubMetadata.kit,
+      stadium: clubMetadata && clubMetadata.stadium,
+      rating: clubData.rating,
+      playerIds: []
+    });
+    console.log("clubId: ", clubId);
+
+    // update league
+    LeagueModel.update(leagueId, { $push: { clubsIds: clubId } });
+  }
+}
+
+function requestImageData(url: string) {
+  return new Promise((resolve) => {
+    const imageRequest = request.defaults({ encoding: null });
+
+    imageRequest.get(url, (error: any, response: any, body: any) => {
+      if (error) {
+        throw error;
+      }
+
+      if (response.statusCode === 200) {
+        const data = "data:" + response.headers["content-type"] + ";base64," + new Buffer(body).toString("base64");
+        resolve(data);
+      }
+    });
+  });
+}
 
 function performRequest(params: object) {
   const endpoint = "https://www.easports.com/fifa/ultimate-team/api/fut/item";
@@ -158,14 +264,15 @@ export class AdminRouter {
    * Initialize the HeroRouter
    */
   constructor() {
-    this.router.post("/", this.createDatabase);
+    this.router.post("/service", this.createDatabaseFromService);
+    this.router.post("/scrape", this.createDatabaseFromScrape);
   }
 
   public getRouter() {
     return this.router;
   }
 
-  public async createDatabase(req: Request, res: Response) {
+  public async createDatabaseFromService(req: Request, res: Response) {
     const leaguesMetadata = metadata.leagues;
     const clubsMetadata = metadata.clubs;
 
@@ -192,6 +299,26 @@ export class AdminRouter {
 
       await creatClubs(players, leagueId, clubsMetadata);
     }
+  }
+
+  public async createDatabaseFromScrape() {
+    const leaguesMetadata = metadata.leagues;
+    const clubsMetadata = metadata.clubs;
+
+    for (const leagueMetadata of leaguesMetadata) {
+      const remoteId = leagueMetadata.remoteId;
+      const leagueId = await LeagueModel.create({
+        name: leagueMetadata.name,
+        imageUrl: leagueMetadata.imageUrl,
+        remoteId: leagueMetadata.remoteId,
+        nation: leagueMetadata.nation,
+        clubsIds: []
+      });
+      console.log("leagueId: ", leagueId);
+
+      await createClubsFromScrapeData(clubsMetadata, leagueId, remoteId);
+    }
+
   }
 }
 

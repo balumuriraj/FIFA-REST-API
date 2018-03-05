@@ -28,6 +28,7 @@ async function generateClubData(club: IClub) {
     abbrName: club.abbrName,
     name: club.name,
     imageUrl: club.imageUrl,
+    imageData: club.imageData,
     kit: club.kit,
     stadium: club.stadium,
     rating: club.rating,
